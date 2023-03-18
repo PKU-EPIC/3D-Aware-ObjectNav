@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>3D-Aware Object Goal Navigation via Simultaneous Exploration and Identification</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <style>
+      body {
+        background: rgb(255, 255, 255) no-repeat fixed top left; 
+        font-family:'Open Sans', sans-serif;
+      }
+    </style>
+
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <h2 style="font-size:30px;">3D-Aware Object Goal Navigation <br>via Simultaneous Exploration and Identification</h2>
+            <h4 style="color:#6e6e6e;"> CVPR 2023 </h4>
+            <hr>
+            <h6> <a href="https://jzhzhang.github.io/" target="_blank">Jiazhao Zhang</a><sup>1,6*</sup>, 
+                 <a href="https://liudai-homepage.github.io/" target="_blank">Liu Dai</a><sup>2*</sup>, 
+                 <a href="https://mfp0610.github.io/" target="_blank">Fanpeng Meng</a><sup>3</sup>, 
+                 <a href="https://fqnchina.github.io/" target="_blank">Qingnan Fan</a><sup>4</sup>, 
+                 <a href="https://xuelin-chen.github.io/" target="_blank">Xuelin Chen</a><sup>4</sup>, 
+                 <a href="https://kevinkaixu.net/" target="_blank">Kai Xu</a><sup>5</sup>,
+                 <a href="https://hughw19.github.io/" target="_blank">He Wang</a><sup>1,6†</sup>
+                 <br>
+                 <br>
+            <p> <sup>1</sup> Peking University &nbsp;
+                <sup>2</sup> Tongji University &nbsp;
+                <sup>3</sup> Huazhong University of Science and Technology &nbsp;
+                <br>
+                <sup>4</sup> Tencent AI Lab &nbsp;
+                <sup>5</sup> National University of Defense Technology &nbsp;
+                <sup>6</sup> BAAI &nbsp;
+                <br>
+            </p>
+            <p> <sup>*</sup> equal contributions &nbsp;
+              <sup>†</sup> corresponding author &nbsp;
+              <br>
+          </p>
+            <!-- <p> <a class="btn btn-secondary btn-lg" href="" role="button">Paper</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Code</a> 
+                <a class="btn btn-secondary btn-lg" href="" role="button">Data</a> </p> -->
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2212.00338" role="button" target="_blank">
+                    <i class="fa fa-file"></i> Paper </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" id="code_soon" href="https://arxiv.org/abs/2212.00338" role="button" target="_blank" disabled=1>
+                <i class="fa fa-github-alt"></i> Code (Coming soon) </a> </p>
+              </div>
+              <!-- <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="files/" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Supplementary(Coming soon)</a> </p>
+              </div> -->
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="width:58%">
+      <div class="row">
+        <div class="col-12 text-center">
+            <hr style="margin-top:0px">
+              <div class="row justify-content-center" style="align-items:center; display:flex;">
+               <img src="images/teaser.png" alt="pipeline" class="img-responsive" width="95%"/>
+              <br>
+            </div>
+            <!-- <div class="row justify-content-center" style="display:flex;"></div> -->
+            <br>
+            <p class="text-justify">
+              <strong>Teaser</strong>. 
+              We present a 3D-aware ObjectNav framework along with simultaneous exploration and identification policies: <b>A$\rightarrow$B</b> , the agent was guided by an exploration policy to look for its target; <b> B$\rightarrow$ C</b> , the agent consistently identified a target object and finally called STOP.
+            </p>
+              <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- abstract -->
+  <section>
+    <div class="container" style="width:58%">
+      <div class="row">
+        <div class="col-12">
+          <h2><strong>Abstract</strong></h2>
+            <hr style="margin-top:0px">
+              <!-- <div class="row justify-content-center" style="align-items:center; display:flex;">
+               <img src="images/teaser.png" alt="input" class="img-responsive" width="95%"/>
+              <br>
+            </div> -->
+          <!-- <p class="text-justify">
+              <h6 style="color:#8899a5;text-align:left"> Figure 1. Framework overview (From the left to right): we leverage domain randomization-enhanced depth simulation to generate paired data, on which we can train our depth restoration network SwinDRNet, and the restored depths will be fed to downstream tasks and improves estimating category-level pose and grasping for specular and transparent objects.</h6>
+          </p> -->
+            <p class="text-justify">
+            Object goal navigation (ObjectNav) in unseen environments is a fundamental task for Embodied AI.
+            Agents in existing works learn ObjectNav policies based on 2D maps, scene graphs, or image sequences. 
+            Considering this task happens in 3D space, a 3D-aware agent can advance its ObjectNav capability via learning from fine-grained spatial information.
+            However, leveraging 3D scene representation can be prohibitively unpractical for policy learning in this floor-level task, due to low sample efficiency and expensive computational cost.
+            In this work, we propose a framework for the challenging 3D-aware ObjectNav based on two straightforward sub-policies.
+            The two sub-polices, namely corner-guided exploration policy and category-aware identification policy, simultaneously perform by utilizing online fused 3D points as observation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+
+  <!-- Methods -->
+  <section>
+    <div class="container" style="width:58%">
+      <div class="row">
+        <div class="col-12">
+          <h2><strong>Methods</strong></h2>
+            <hr style="margin-top:0px">
+            <!-- <h3 style="margin-top:20px; margin-bottom:20px; color:#717980"><b>Part 1</b></h3> -->
+            <div class="row justify-content-center" style="align-items:center; display:flex;">
+              <img src="images/overview.png" alt="input" class="img-responsive" width="85%"/>
+            </div>  
+            <p class="text-justify">
+                <strong>We take in a posed RGB-D image at time step $t$ and perform point-based construction algorithm to online fuse a 3D scene representation ($M_{3D}^{(t)}$), along with a $M_{2D}^{(t)}$ from semantics projection. Then, we simultaneously leverage two policies, including a <i>corner-guided exploration policy</i> $\pi_e$ and <i>category-awre identification policy</i> $\pi_f$, to predict a discrete corner goal $g_e^{(t)}$ and a target goal $g_f^{(t)}$ (if exist) respectively. Finally, the local planning module will drive the agent to the given target goal $g_f^{(t)}$ (top priority) or the corner goal $g_e^{(t)}$.</strong>
+              </p>
+            <br>
+
+
+            <h3 style="margin-top:20px; margin-bottom:20px; color:#717980"><b>Online points fusion*</b></h3>
+            <div class="row justify-content-center" style="align-items:center; display:flex;">
+              <img src="images/points_fusion.png" alt="input" class="img-responsive" width="55%"/>
+            </div>
+            <p class="text-justify">
+              <strong><b>Left:</b> A robot takes multi-view observations during navigation. <b>Right:</b> The points $p$ are organized by dynamically allocated blocks $B$ and per-point octrees $O$, which can be used to query neighborhood points of any given point.</strong>
+            </p>
+
+
+            <br>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+
+
+  <section>
+    <div class="container" style="width:58%">
+      <div class="row">
+        <div class="col-12">
+          <h2><strong>Visualization</strong></h2>
+            <hr style="margin-top:0px">
+              <div class="row justify-content-center" style="align-items:center; display:flex;">
+               <img src="images/vis_seq.png" alt="input" class="img-responsive" width="95%"/>
+              <br>
+              </div>
+
+            <p class="text-justify">
+              <center>More results can be found in our paper.</center>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+
+
+
+  <!-- Video -->
+   <section>
+    <div class="container" style="width:58%">
+      <div class="row">
+        <div class="col-12">
+          <h2><strong>Video</strong></h2>
+          <hr style="margin-top:0px">
+          <div class="row justify-content-center" style="align-items:center; display:flex;">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" controls>
+              <source src="videos/video.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <br><br>
+  
+
+  <!-- Team -->
+  <section>
+    <div class="container" style="width:58%">
+      <div class="row">
+        <div class="col-12">
+          <h2><strong>Team</strong></h2>
+          <hr style="margin-top:0px">
+          <table style="width:100%">
+            <p>
+            <tr>
+              <td> <center> <a href="https://jzhzhang.github.io/" target="_blank"> <img alt src="images/team_jiazhao.png" height="100"/> </a> </center></td>
+              <td> <center> <a href="https://liudai-homepage.github.io/" target="_blank"> <img alt src="images/team_liu.jpg" height="100"/> </a> </center></td>
+              <td> <center> <a href="https://mfp0610.github.io/" target="_blank"> <img alt src="images/team_fanpeng.png" height="100"/> </a> </center></td>
+              <td> <center> <a href="https://fqnchina.github.io/" target="_blank"> <img alt src="images/team_qingnan.png" height="100"/> </a></center> </td>
+              <td> <center> <a href="https://xuelin-chen.github.io/" target="_blank"> <img alt src="images/team_xuelin.png" height="100"/> </a> </center></td>
+              <td> <center> <a href="https://kevinkaixu.net/" target="_blank"> <img alt src="images/team_kai.png" height="100"/> </a> </center></td>
+              <td> <center> <a href="https://hughw19.github.io/" target="_blank"> <img alt src="images/team_he.png" height="100"/> </a> </center></td>
+            </tr>
+            <tr>
+              <td>  <center>  <font size= "2">Jiazhao Zhang<sup>1,6*</sup></font> </center></td>
+              <td>  <center>  <font size= "2">Liu Dai<sup>2*</sup></font></center> </td>
+              <td>  <center>  <font size= "2">Fanpeng Meng<sup>3</sup></font></center> </td>
+              <td>  <center>  <font size= "2">Qingnan Fan<sup>4</sup></font> </center></td>
+              <td>  <center>  <font size= "2">Xuelin Chen<sup>4</sup></font> </center></td>
+              <td>  <center>  <font size= "2">Kai Xu<sup>5</sup></font> </center></td>
+              <td> <center>   <font size= "2">He Wang<sup>1,6†</sup></font> </center></td>
+            </tr>
+            </p>
+            </table>
+        </div>
+        <div class="col-12">
+          <p> <font size= "2"><sup>1</sup> CFCS, Peking University</font> &nbsp;
+            <font size= "2"><sup>2</sup> CEIE, Tongji University</font> &nbsp;
+            <font size= "2"><sup>3</sup> Huazhong University of Science and Technology</font> &nbsp;
+            <font size= "2"><sup>4</sup> Tencent AI Lab</font> &nbsp;
+            <font size= "2"><sup>5</sup> National University of Defense Technology</font> &nbsp;
+            <font size= "2"><sup>6</sup> BAAI</font> &nbsp;
+            <br>
+            <font size= "2"><sup>*</sup> equal contributions</font> &nbsp;
+            <font size= "2"><sup>†</sup> corresponding author</font> &nbsp;
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+            
+  <!-- citing -->
+  <div class="container" style="width:58%">
+    <div class="row ">
+      <div class="col-12">
+          <h2><strong>Citation</strong></h2>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>
+@article{zhang20223d,
+  title={3D-Aware Object Goal Navigation via Simultaneous Exploration and Identification},
+  author={Zhang, Jiazhao and Dai, Liu and Meng, Fanpeng and Fan, Qingnan and Chen, Xuelin and Xu, Kai and Wang, He},
+  journal={arXiv preprint arXiv:2212.00338},
+  year={2022}
+}</code></pre>
+      </div>
+    </div>
+  </div>
+  <br>
+
+    <!-- Contact -->
+    <div class="container" style="width:58%">
+      <div class="row ">
+        <div class="col-12">
+            <h2><strong>Contact</strong></h2>
+            <hr style="margin-top:0px">
+            <p>If you have any questions, please feel free to contact <b>Jiazhao Zhang</b> at zhngjizh_at_gmail_dot_com, <b>Liu Dai</b> at dailiu_dot_cndl_at_gmail_dot_com, and <b>He Wang</b> at hewang_at_pku_dot_edu_dot_cn </p>
+        </pre>
+        </div>
+      </div>
+    </div>
+
+
+
+  <footer class="text-center" style="margin-bottom:10px; font-size: medium;">
+      <hr>
+      Thanks to <a href="https://lioryariv.github.io/" target="_blank">Lior Yariv</a> for the <a href="https://lioryariv.github.io/idr/" target="_blank">website template</a>.
+  </footer>
+  <script>
+    MathJax = {
+      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</body>
+</html>
